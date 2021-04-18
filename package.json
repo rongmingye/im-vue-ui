@@ -1,0 +1,28 @@
+{
+  "name": "min-vue-ui",
+  "version": "1.0.0",
+  "description": "min ui库",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cross-env npx http_env=pord --env production webpack --config build/webpack.config.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "webpack": "^5.33.2",
+    "webpack-cli": "^4.6.0"
+  },
+  "devDependencies": {
+    "babel-loader": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "css-loader": "^5.2.2",
+    "file-loader": "^6.2.0",
+    "less": "^4.1.1",
+    "less-loader": "^8.1.1",
+    "style-loader": "^2.0.0",
+    "url-loader": "^4.1.1",
+    "vue": "^2.6.12",
+    "vue-loader": "^15.9.6"
+  }
+}

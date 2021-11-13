@@ -1,15 +1,22 @@
 const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const webpack = require('webpack')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
-export default {
+const isProd = process.env.NODE_ENV === 'production'
+
+module.exports = {
     entry: './src/index.js',
     output: {
-        path: path.resolve(__dirname, '..', 'dist'),
-        filename: '[name].bundle.[hash].js'
+        path: path.resolve(__dirname, '..', 'lib'),
+        filename: 'im.common.js'
     },
     resolve: {
-        extensions: ['js', 'vue', 'json']
+        extensions: ['.js', '.vue', '.json'],
+        alias: {
+            packages: path.resolve(__dirname, '../packages')
+        }
     },
     module: {
         rules: [{
@@ -23,22 +30,22 @@ export default {
             },
             {
                 test: /\.less$/,
-                use: ['style-loader', 'css-loader', 'less-loader']
+                use: [isProd ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader', 'less-loader']
             },
             {
                 test: /\.(svg|otf|ttf|woff2?|eot|gif|png|jpe?g)(\?\S*)?$/,
                 loader: 'url-loader',
-                query: {
+                options: {
                     limit: 10000,
-                    name: path.posix.join('static', '[name].[hash:7].[ext]')
                 }
             }
         ]
     },
-    plugin: [
+    plugins: [
         new VueLoaderPlugin(),
         new webpack.DefinePlugin({
-            HTTP_ENV: JSON.stringify(process.env.http_env)
-        })
+            'process.env.HTTP_ENV': JSON.stringify(process.env.HTTP_ENV)
+        }),
+        new CleanWebpackPlugin()
     ]
 }

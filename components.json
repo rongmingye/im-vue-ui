@@ -1,0 +1,7 @@
+{
+    "button": "./packages/im-button/index.js",
+    "dialog": "./packages/im-dialog/index.js",
+    "loading": "./packages/im-loading/index.js",
+    "message": "./packages/im-message/index.js",
+    "select": "./packages/im-select/index.js"
+}
